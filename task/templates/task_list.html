@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task List</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div class="container mt-4">
+            <h1 class="text-center">To-Do Task</h1>
+    
+            <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">Create Task</a>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Status</th>
+                        <th>Created Date</th>
+                        <th>Priority</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in task %}
+                        <tr>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.status }}</td>
+                            <td>{{ task.created_date }}</td>
+                            <td>{{ task.priority }}</td>
+                            <td>{{ task.expiry_date }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">No tasks available.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'task_clear' %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete all tasks?');">
+                Clear All Tasks
+            </a>
+        </div>
+    
+    </body>
+    
+</html>
